@@ -9,6 +9,11 @@ namespace One
 {
     public abstract class Agent : IRunnable
     {
+
+        public Agent (int id)
+        {
+            Id = id;
+        }
         
         public IEnumerator<float> CoroutineUpdate()
         {
@@ -31,6 +36,7 @@ namespace One
         }
 
         public abstract void Update();
+
 
         public bool HasFinished { get; private set; } = false;
 
