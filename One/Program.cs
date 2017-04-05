@@ -18,7 +18,7 @@ namespace One
         {
             Console.WriteLine("One");
             Console.WriteLine("zmiana na gita");
-
+            
             Console.ReadLine();
         }
     }
