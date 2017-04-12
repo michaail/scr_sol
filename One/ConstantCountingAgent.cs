@@ -12,14 +12,15 @@ namespace One
 
         public ConstantCountingAgent(int id) : base(id)
         {
-
+            Console.WriteLine("cca I'm here alive {0}", id);
         }
 
         public override void Update()
         {
             if (counter++ >=10)
             {
-                Console.WriteLine(Id);
+                Console.WriteLine("cca {0} ctr {1}", Id, counter);
+                Fin();
             }
 
         }

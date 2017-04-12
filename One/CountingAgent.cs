@@ -12,14 +12,15 @@ namespace One
 
         public CountingAgent(int id) : base(id)
         {
-
+            Console.WriteLine("ca I'm here alive {0}", id);
         }
 
         public override void Update()
         {
             if (counter++ <= this.Id)
             {
-                Console.WriteLine(Id);
+                Console.WriteLine("ca {0}", Id);
+                Fin();
             }
             //throw new NotImplementedException();
         }

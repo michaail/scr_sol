@@ -10,20 +10,28 @@ namespace One
     public abstract class Agent : IRunnable
     {
 
-        public Agent (int id)
+        protected float vTime = 0.0f;
+
+        protected readonly float timeStep;
+
+        public Agent (int id, float timeStep = 0.1f)
         {
+            this.timeStep = timeStep;
             Id = id;
         }
         
         public IEnumerator<float> CoroutineUpdate()
         {
-            float n = new float(); //placeholder
+            //float n = new float(); //placeholder
             while(!HasFinished)
             {
+                Update();
+                vTime += timeStep;
                 if (HasFinished)
-                    yield break;
+
+                    break;
                 else
-                    yield return n;
+                    yield return vTime;
             }
         }
 
@@ -31,8 +39,15 @@ namespace One
         {
             while(!HasFinished)
             {
-                System.Threading.Thread.Sleep(10); //placeholder
+                Update();
+                vTime += timeStep;
+                System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
             }
+        }
+
+        public void Fin()
+        {
+            this.HasFinished = true;
         }
 
         public abstract void Update();

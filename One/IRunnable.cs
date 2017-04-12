@@ -14,6 +14,5 @@ namespace One
         
         bool HasFinished { get; }
         
-        
     }
 }
