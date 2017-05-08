@@ -40,7 +40,7 @@ namespace One
                 vTime += timeStep;
                 if (HasFinished)
 
-                    break;
+                    yield break;
                 else
                     yield return vTime;
             }

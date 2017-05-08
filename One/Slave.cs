@@ -8,15 +8,15 @@ namespace One
 {
     class Slave : Agent
     {
-        List<string> los = new List<string>();
+        List<int> los = new List<int>();
 
         //int iter = new int();
 
-        Dictionary<string, int> slownik = new Dictionary<string, int>();
+        //Dictionary<string, int> slownik = new Dictionary<string, int>();
 
         //int wynik = new int();
         
-        public Slave(int id, List<string> losy) : base(id)
+        public Slave(int id, List<int> losy) : base(id)
         {
             Console.WriteLine("I'm in Slave");
             los = losy;
@@ -27,10 +27,9 @@ namespace One
         
         public override void Update()
         {
-
+            /*
             for (int i = 0; i < los.Count(); i++)
             {
-
                 if(!slownik.Any(d => d.Key==los[i]))
                 {
                     slownik.Add(los[i], 2);
@@ -44,8 +43,6 @@ namespace One
                     //slownik.va
                     //slownik[los[i], ];
                 }
-
-
                 //if (los.Any(slownik[]))
 
                 //if(los[i] == slownik[])
@@ -59,25 +56,24 @@ namespace One
                 Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
             }
             //Console.WriteLine(slownik.Keys[i]);
+            */
 
 
 
-
-            //for (int i = 0; i < los.Count()/2; i++)
-            //{
-            //    //wynik += los[i];
-            //    //Console.WriteLine("etap1");
-            //    //System.Threading.Thread.Sleep(10);
-            //}
-            //Console.WriteLine("1 tappa Slave lives with result of: {0}", wynik);
-            //for (int i = los.Count()/2; i < los.Count(); i++)
-            //    {
-            //        //wynik += los[i];
-            //        //Console.WriteLine("etap 2");
-            //        //System.Threading.Thread.Sleep(10);
-            //    }
-
-            //Console.WriteLine("2 tappa Slave dies with result of: {0}", wynik);
+            for (int i = 0; i < los.Count() / 2; i++)
+            {
+                wynik += los[i];
+                //Console.WriteLine("etap1");
+                //System.Threading.Thread.Sleep(20);
+            }
+            Console.WriteLine("1 tappa Slave {0} lives with result of: {1}", Id, wynik);
+            for (int i = los.Count() / 2; i < los.Count(); i++)
+            {
+                wynik += los[i];
+                //Console.WriteLine("etap 2");
+                //System.Threading.Thread.Sleep(10);
+            }
+            Console.WriteLine("2 tappa Slave {0} dies with result of: {1}", Id, wynik);
 
             Fin();
         }

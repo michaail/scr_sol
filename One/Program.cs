@@ -57,7 +57,7 @@ namespace One
                         break;
                     }
                 }
-                //Master mistrz = new Master(100, slaves);
+                
             }
         }
 
@@ -86,9 +86,9 @@ namespace One
         {
             
             var runnables = new List<IRunnable>(1000);
-            int id = 0;
+            //int id = 0;
 
-            
+            /*
             for (; id < 10; ++id)
                 runnables.Add(new CountingAgent(id));
 
@@ -99,27 +99,29 @@ namespace One
             limit = runnables.Count() + 100;
             for (; id < limit; ++id)
                 runnables.Add(new ConstantCountingAgent(id));
-            /*    
+                */
             Random rnd = new Random();
             for (int i = 0; i < 1000; i++)
             {
-                losowe.Add(rnd.Next(1, 1000));
+                losowe.Add(rnd.Next(1, 10000));
+                //losowe.Add(rnd.Next(1, 1000));
+                
                 //Console.WriteLine(losowe[i]);
             }
-
+            /*
             string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
             string[] split = text.Split(new Char[] { ' ', '\n' });
             List<string> podzielona = split.ToList();
-            
-            var lista = ChunkBy(podzielona, podzielona.Count());
             */
+            var lista = ChunkBy(losowe, losowe.Count()/4);
+            
             //for (int i = 0; i < lista[0].Count(); i++)
             //{
 
             //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
             //}
-            /*
-            for (int i = 0; i<=0; i++)
+            
+            for (int i = 0; i<=3; i++)
             {
                 runnables.Add(new Slave(i, lista[i]));
 
@@ -128,7 +130,7 @@ namespace One
                 //runnables.Add(new Slave(i, lista[i]));
 
             }
-            */
+            
             
             //for (int i = 0; i < split.Count(); i++)
             //{
@@ -137,7 +139,7 @@ namespace One
             //var slaves = runnables.Where(r => r.isSlave == true);
             
 
-            //runnables.Add(new Master(1000, runnables));
+            runnables.Add(new Master(1000, runnables));
 
             
             return runnables;

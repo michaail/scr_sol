@@ -10,7 +10,7 @@ namespace One
     {
         List<IRunnable> agenci = new List<IRunnable>();
 
-        //int wynik = new int();
+        new int wynik = new int();
 
         public Master(int id, List<IRunnable> runnables) : base(id)
         {
