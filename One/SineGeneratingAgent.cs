@@ -8,7 +8,6 @@ namespace One
 {
     class SineGeneratingAgent : Agent
     {
-        private int counter;
         
         public float Output { get; set; }
 
@@ -25,9 +24,6 @@ namespace One
                 Console.WriteLine("sga {0} ", Id);
                 Fin();
             }
-
-           
-            //throw new NotImplementedException();
         }
     }
 }

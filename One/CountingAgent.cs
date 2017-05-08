@@ -22,7 +22,6 @@ namespace One
                 Console.WriteLine("ca {0}", Id);
                 Fin();
             }
-            //throw new NotImplementedException();
         }
     }
 }

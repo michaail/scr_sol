@@ -9,6 +9,7 @@ namespace One
 {
     public abstract class Agent : IRunnable
     {
+        
 
         protected float vTime = 0.0f;
 
@@ -19,10 +20,20 @@ namespace One
             this.timeStep = timeStep;
             Id = id;
         }
+
+        public Agent (int id, List<string> lista)
+        {
+            Id = id;
+            
+        }
+        
+        public Agent (int id, IEnumerable<IRunnable> runnables)
+        {
+            Id = id;
+        }
         
         public IEnumerator<float> CoroutineUpdate()
         {
-            //float n = new float(); //placeholder
             while(!HasFinished)
             {
                 Update();
@@ -50,13 +61,24 @@ namespace One
             this.HasFinished = true;
         }
 
-        public abstract void Update();
+        public void SetSlave()
+        {
+            this.isSlave = true;
+        }
 
+        public abstract void Update();
 
         public bool HasFinished { get; private set; } = false;
 
+        public bool isSlave { get; private set; } = false;
+
+        public int wynik { get; set; }
+
+        public int initial { get; set; }
+
+        //public List<int> losy { get; set; } = null;
+
         public int Id { get; private set; }
-        
 
     }
 }
