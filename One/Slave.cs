@@ -8,7 +8,7 @@ namespace One
 {
     class Slave : Agent
     {
-        List<int> los = new List<int>();
+        List<string> los = new List<string>();
 
         //int iter = new int();
 
@@ -16,7 +16,7 @@ namespace One
 
         //int wynik = new int();
         
-        public Slave(int id, List<int> losy) : base(id)
+        public Slave(int id, List<string> losy) : base(id)
         {
             Console.WriteLine("I'm in Slave");
             los = losy;
@@ -27,12 +27,12 @@ namespace One
         
         public override void Update()
         {
-            /*
+            
             for (int i = 0; i < los.Count(); i++)
             {
                 if(!slownik.Any(d => d.Key==los[i]))
                 {
-                    slownik.Add(los[i], 2);
+                    slownik.Add(los[i], 1);
                     //iter++;
                 }
                 else
@@ -40,8 +40,7 @@ namespace One
                     int currentCount;
                     slownik.TryGetValue(los[i], out currentCount);
                     slownik[los[i]] = currentCount +1;
-                    //slownik.va
-                    //slownik[los[i], ];
+                    
                 }
                 //if (los.Any(slownik[]))
 
@@ -50,16 +49,18 @@ namespace One
                 //Console.WriteLine(los[i]);
             }
 
+            
             foreach (KeyValuePair<string, int> kvp in slownik)
             {
                 //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
                 Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
             }
+            
             //Console.WriteLine(slownik.Keys[i]);
-            */
+            
 
 
-
+            /*
             for (int i = 0; i < los.Count() / 2; i++)
             {
                 wynik += los[i];
@@ -74,7 +75,7 @@ namespace One
                 //System.Threading.Thread.Sleep(10);
             }
             Console.WriteLine("2 tappa Slave {0} dies with result of: {1}", Id, wynik);
-
+            */
             Fin();
         }
     }

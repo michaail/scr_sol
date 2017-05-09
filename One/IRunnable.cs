@@ -17,6 +17,8 @@ namespace One
         int initial { get; }
 
         IEnumerator<float> CoroutineUpdate();
+
+        System.Collections.Generic.Dictionary<string, int> slownik { get; }
         
         bool HasFinished { get; }
 

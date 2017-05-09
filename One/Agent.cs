@@ -80,5 +80,12 @@ namespace One
 
         public int Id { get; private set; }
 
+        private Dictionary<string, int> Slownik;
+
+        public Dictionary<string, int> slownik {
+            get { return Slownik; }
+            set { slownik = value; }
+        }
+        
     }
 }

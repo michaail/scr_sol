@@ -99,7 +99,7 @@ namespace One
             limit = runnables.Count() + 100;
             for (; id < limit; ++id)
                 runnables.Add(new ConstantCountingAgent(id));
-                */
+                
             Random rnd = new Random();
             for (int i = 0; i < 1000; i++)
             {
@@ -108,20 +108,21 @@ namespace One
                 
                 //Console.WriteLine(losowe[i]);
             }
-            /*
-            string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
-            string[] split = text.Split(new Char[] { ' ', '\n' });
-            List<string> podzielona = split.ToList();
             */
-            var lista = ChunkBy(losowe, losowe.Count()/4);
-            
-            //for (int i = 0; i < lista[0].Count(); i++)
-            //{
 
+            string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
+            string[] split = text.Split(new Char[] {});
+            List<string> podzielona = split.ToList();
+            
+            var lista = ChunkBy(podzielona, podzielona.Count()/1);
+            
+            //for (int i = 0; i < split.Count(); i++)
+            //{
+            //    Console.WriteLine(split[i]);
             //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
             //}
             
-            for (int i = 0; i<=3; i++)
+            for (int i = 0; i<=0; i++)
             {
                 runnables.Add(new Slave(i, lista[i]));
 
@@ -139,7 +140,7 @@ namespace One
             //var slaves = runnables.Where(r => r.isSlave == true);
             
 
-            runnables.Add(new Master(1000, runnables));
+            //runnables.Add(new Master(1000, runnables));
 
             
             return runnables;
