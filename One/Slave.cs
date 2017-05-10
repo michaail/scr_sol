@@ -12,7 +12,7 @@ namespace One
 
         //int iter = new int();
 
-        //Dictionary<string, int> slownik = new Dictionary<string, int>();
+        Dictionary<string, int> slownik = new Dictionary<string, int>();
 
         //int wynik = new int();
         

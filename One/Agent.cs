@@ -10,7 +10,6 @@ namespace One
     public abstract class Agent : IRunnable
     {
         
-
         protected float vTime = 0.0f;
 
         protected readonly float timeStep;
@@ -80,12 +79,12 @@ namespace One
 
         public int Id { get; private set; }
 
-        private Dictionary<string, int> Slownik;
+        //private Dictionary<string, int> Slownik;
 
-        public Dictionary<string, int> slownik {
-            get { return Slownik; }
-            set { slownik = value; }
-        }
+        //public Dictionary<string, int> slownik {
+        //    get { return Slownik; }
+        //    set { slownik = value; }
+        //}
         
     }
 }
