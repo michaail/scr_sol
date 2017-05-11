@@ -10,6 +10,10 @@ namespace One
     {
         void Run();
 
+        void creat(Dictionary<string, int> slown);
+
+        Dictionary<string, int> slownik { get; set; }
+
         bool isSlave { get; }
 
         int wynik { get; }

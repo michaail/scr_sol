@@ -55,6 +55,13 @@ namespace One
             }
         }
 
+        public Dictionary<string, int> slownik { get; set; }
+
+        public void creat(Dictionary<string, int> slown)
+        {
+            
+        }
+
         public void Fin()
         {
             this.HasFinished = true;
@@ -64,6 +71,8 @@ namespace One
         {
             this.isSlave = true;
         }
+
+        //public Dictionary<string, int> slownik { get; protected set; }
 
         public abstract void Update();
 

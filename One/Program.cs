@@ -114,7 +114,7 @@ namespace One
             string[] split = text.Split(new Char[] {});
             List<string> podzielona = split.ToList();
             
-            var lista = ChunkBy(podzielona, podzielona.Count()/1);
+            var lista = ChunkBy(podzielona, podzielona.Count()/4);
             
             //for (int i = 0; i < split.Count(); i++)
             //{
@@ -122,7 +122,7 @@ namespace One
             //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
             //}
             
-            for (int i = 0; i<=0; i++)
+            for (int i = 0; i<=3; i++)
             {
                 runnables.Add(new Slave(i, lista[i]));
 
@@ -131,16 +131,26 @@ namespace One
                 //runnables.Add(new Slave(i, lista[i]));
 
             }
+            List<Dictionary<string, int>> ino = new List<Dictionary<string, int>>();
+
+            foreach (var d in runnables)
+            {
+                ino.Add( new Dictionary < string, int >() );
+            }
+
+            
+            
             
             
             //for (int i = 0; i < split.Count(); i++)
             //{
             //    Console.WriteLine(split[i]);
             //}
-            //var slaves = runnables.Where(r => r.isSlave == true);
+            
+            
             
 
-            //runnables.Add(new Master(1000, runnables));
+            runnables.Add(new Master(1000, runnables));
 
             
             return runnables;

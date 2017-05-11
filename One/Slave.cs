@@ -14,6 +14,7 @@ namespace One
 
         Dictionary<string, int> slownik = new Dictionary<string, int>();
 
+
         //int wynik = new int();
         
         public Slave(int id, List<string> losy) : base(id)
@@ -28,7 +29,7 @@ namespace One
         public override void Update()
         {
             
-            for (int i = 0; i < los.Count(); i++)
+            for (int i = 1; i < los.Count(); i++)
             {
                 if(!slownik.Any(d => d.Key==los[i]))
                 {
@@ -48,7 +49,7 @@ namespace One
 
                 //Console.WriteLine(los[i]);
             }
-
+            creat(slownik);
             
             foreach (KeyValuePair<string, int> kvp in slownik)
             {

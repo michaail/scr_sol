@@ -17,10 +17,15 @@ namespace One
             agenci = runnables;
             Console.WriteLine("I'm in Master");
             wynik = 0;
+            
+
+
+
         }
 
         public override void Update()
         {
+
             while (!agenci.Any(d => d.HasFinished == true))
             {
                 System.Threading.Thread.Sleep(10);
@@ -28,8 +33,18 @@ namespace One
 
             foreach (var a in agenci)
             {
-                wynik += a.wynik;
+              
+
+
             }
+
+
+            //var result = dictionaries.SelectMany(dict => dict)
+            //             .ToLookup(pair => pair.Key, pair => pair.Value)
+            //             .ToDictionary(group => group.Key, group => group.First());
+
+
+
             Console.WriteLine("KONIEC MASTERA!!!!!!!!!!!!!!!!!! wynik: {0}", wynik);
             //Console.WriteLine(wynik);
             Fin();
