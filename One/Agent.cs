@@ -55,6 +55,11 @@ namespace One
                 System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
             }
         }
+        public void Start()
+        {
+            this.HasFinished = false;
+        }
+
 
         public void Fin()
         {
@@ -80,5 +85,10 @@ namespace One
 
         public int Id { get; private set; }
 
+
+      
+
     }
+
+    
 }

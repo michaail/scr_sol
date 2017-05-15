@@ -8,7 +8,11 @@ namespace One
 {
     class Slave : Agent
     {
+
+        //Extensions dodatki = new Extensions();
+
         List<int> los = new List<int>();
+        int iloscEtapow = new int();
 
         //int iter = new int();
 
@@ -18,13 +22,17 @@ namespace One
         
         public Slave(int id, List<int> losy) : base(id)
         {
-            Console.WriteLine("I'm in Slave");
+            Console.WriteLine("I'm in Slave {0}", id);
             los = losy;
             wynik = 0;
             //iter = 0;
             SetSlave();
+            iloscEtapow = 10;
+            
+            //Extensions dodatki = new Extensions();
         }
-        
+       
+
         public override void Update()
         {
             /*
@@ -59,21 +67,20 @@ namespace One
             */
 
 
+            var podzielona = Extensions.ChunkBy(los, los.Count()/iloscEtapow);
+            //List<List<int>> podzielona = Extensions.ChunkBy<>
 
-            for (int i = 0; i < los.Count() / 2; i++)
+            for (int i = 0; i < podzielona.Count(); i++)
             {
-                wynik += los[i];
-                //Console.WriteLine("etap1");
-                //System.Threading.Thread.Sleep(20);
+                for (int j = 0; j < podzielona[i].Count(); j++)
+                {
+                    wynik += podzielona[i][j];
+                }
+                Console.WriteLine("Slave {2} wynik po {0} etapie: {1}", i, wynik, Id);
             }
-            Console.WriteLine("1 tappa Slave {0} lives with result of: {1}", Id, wynik);
-            for (int i = los.Count() / 2; i < los.Count(); i++)
-            {
-                wynik += los[i];
-                //Console.WriteLine("etap 2");
-                //System.Threading.Thread.Sleep(10);
-            }
-            Console.WriteLine("2 tappa Slave {0} dies with result of: {1}", Id, wynik);
+
+            //Console.WriteLine(podzielona.Count());
+           
 
             Fin();
         }

@@ -34,5 +34,7 @@ namespace One
             //Console.WriteLine(wynik);
             Fin();
         }
+
+        
     }
 }

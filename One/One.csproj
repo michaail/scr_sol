@@ -61,6 +61,7 @@
     <Compile Include="Agent.cs" />
     <Compile Include="ConstantCountingAgent.cs" />
     <Compile Include="CountingAgent.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="IRunnable.cs" />
     <Compile Include="Master.cs" />
     <Compile Include="Program.cs" />

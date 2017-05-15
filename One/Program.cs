@@ -113,7 +113,7 @@ namespace One
             string[] split = text.Split(new Char[] { ' ', '\n' });
             List<string> podzielona = split.ToList();
             */
-            var lista = ChunkBy(losowe, losowe.Count()/4);
+            var lista = ChunkBy(losowe, losowe.Count()/3);
             
             //for (int i = 0; i < lista[0].Count(); i++)
             //{
@@ -121,7 +121,7 @@ namespace One
             //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
             //}
             
-            for (int i = 0; i<=3; i++)
+            for (int i = 0; i<=2; i++)
             {
                 runnables.Add(new Slave(i, lista[i]));
 
