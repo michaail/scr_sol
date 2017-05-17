@@ -31,11 +31,11 @@ namespace One
                 System.Threading.Thread.Sleep(10);
             }
 
-            while (agenci.Any(d => d.slow == null))
-            {
-                Console.WriteLine("pusty slow");
-                System.Threading.Thread.Sleep(100);
-            }
+            //while (agenci.Any(d => d.slow == null))
+            //{
+            //    Console.WriteLine("pusty slow");
+            //    System.Threading.Thread.Sleep(100);
+            //}
 
             var dictionaries = new List<Dictionary<string, int>> { };
             foreach (var a in agenci)
@@ -47,7 +47,7 @@ namespace One
                 }
             }
 
-            Console.WriteLine(dictionaries.Count());
+            //Console.WriteLine(dictionaries.Count());
             var term = dictionaries.ToArray();
             //Console.WriteLine(term.Count());
 
@@ -62,13 +62,13 @@ namespace One
                 .GroupBy(kvp => kvp.Key, 
                 (key, kvps) => new { Key = key, Value = kvps.Sum(kvp => kvp.Value) })
                 .ToDictionary(x => x.Key, x => x.Value);
-                temp = result;
-            
+                //temp = result;
+            //GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
 
-            Console.WriteLine(term.Count());
-            for (int d = 0; d < temp.Count(); d++)
+            //Console.WriteLine(term.Count());
+            for (int d = 0; d < result.Count(); d++)
             {
-                //Console.WriteLine("{0} - {1}", d, temp.ElementAt(d));
+                Console.WriteLine("{0} - {1}", d, result.ElementAt(d));
             }
 
             //if (!slownik.Any(d => d.Key == ))

@@ -12,7 +12,7 @@ namespace One
         //Extensions dodatki = new Extensions();
 
         List<string> los = new List<string>();
-        Dictionary<string, int> slownik = new Dictionary<string, int>();
+        private Dictionary<string, int> slownik = new Dictionary<string, int>();
 
         int iloscEtapow = new int();
 
@@ -29,7 +29,7 @@ namespace One
             wynik = 0;
             //iter = 0;
             SetSlave();
-            iloscEtapow = 4;
+            iloscEtapow = 1;
             
             //Extensions dodatki = new Extensions();
         }
@@ -46,7 +46,7 @@ namespace One
             {
                 var frequency = podzielona[i].GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
                 slownik = frequency;
-                System.Threading.Thread.Sleep(1000);
+                //System.Threading.Thread.Sleep(1000);
                 for (int d = 0; d < slownik.Count(); d++)
                 {
                     //Console.WriteLine("{0} - {1}", i, slownik.ElementAt(d));
@@ -54,8 +54,12 @@ namespace One
 
             }
 
-            //slow = slownik;
-           
+            slow = slownik;
+            Console.WriteLine("slave {0} dlugosc: {1}",Id, slow.Count());
+            //for (int d = 0; d < slow.Count(); d++)
+            //{
+            //    //Console.WriteLine("{0} - {1}", d, temp.ElementAt(d));
+            //}
 
             Fin();
         }
