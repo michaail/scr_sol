@@ -99,7 +99,8 @@ namespace One
             limit = runnables.Count() + 100;
             for (; id < limit; ++id)
                 runnables.Add(new ConstantCountingAgent(id));
-                */
+            */
+            /*
             Random rnd = new Random();
             for (int i = 0; i < 1000; i++)
             {
@@ -108,12 +109,13 @@ namespace One
                 
                 //Console.WriteLine(losowe[i]);
             }
-            /*
-            string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
-            string[] split = text.Split(new Char[] { ' ', '\n' });
-            List<string> podzielona = split.ToList();
             */
-            var lista = ChunkBy(losowe, losowe.Count()/3);
+            
+            string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
+            string[] split = text.Split(new Char[] { });
+            List<string> podzielona = split.ToList();
+            
+            var lista = ChunkBy(podzielona, podzielona.Count()/10);
             
             //for (int i = 0; i < lista[0].Count(); i++)
             //{
@@ -121,13 +123,13 @@ namespace One
             //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
             //}
             
-            for (int i = 0; i<=2; i++)
+            for (int i = 0; i<=9; i++)
             {
-                runnables.Add(new Slave(i, lista[i]));
+                //runnables.Add(new Slave(i, lista[i]));
 
                 //Console.WriteLine("liczba el w talicy skroc: {0}", lista[i].Count);
                 //Console.WriteLine(lista[i][2].ToString());
-                //runnables.Add(new Slave(i, lista[i]));
+                runnables.Add(new Slave(i, lista[i]));
 
             }
             
