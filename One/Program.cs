@@ -14,6 +14,7 @@ namespace One
 {
     static class Program
     {
+        static int slaveCount = 10;
         static List<int> losowe = new List<int>();
       
         static void Main(string[] args)
@@ -22,6 +23,7 @@ namespace One
             //Console.WriteLine("zmiana na gita");
             //GenerateRunnables();
 
+            //Wywołanie działania programu na wątkach
             RunThreads(GenerateRunnables());
             //RunFibres(GenerateRunnables());
 
@@ -29,12 +31,10 @@ namespace One
             Console.ReadLine();
         }
 
+        //Działanie na wątkach
         static void RunThreads(IEnumerable<IRunnable> runnables)
         {
             var threads = new List<System.Threading.Thread>(runnables.Count());
-
-            //var slaves = runnables.Where(r => r.isSlave==true);
-            //Console.WriteLine(runnables.Count().ToString());
 
             foreach (var run in runnables)
             {
@@ -60,7 +60,8 @@ namespace One
                 
             }
         }
-
+        
+        //Działanie na włóknach
         static void RunFibres(IEnumerable<IRunnable> runnables)
         {
             var enumerator = runnables.Select(r => r.CoroutineUpdate());
@@ -86,68 +87,30 @@ namespace One
         {
             
             var runnables = new List<IRunnable>(1000);
-            //int id = 0;
-
-            /*
-            for (; id < 10; ++id)
-                runnables.Add(new CountingAgent(id));
-
-            int limit = runnables.Count() + 10;
-            for (; id < limit; ++id)
-                runnables.Add(new SineGeneratingAgent(id));
-
-            limit = runnables.Count() + 100;
-            for (; id < limit; ++id)
-                runnables.Add(new ConstantCountingAgent(id));
-            */
-            /*
-            Random rnd = new Random();
-            for (int i = 0; i < 1000; i++)
-            {
-                losowe.Add(rnd.Next(1, 10000));
-                //losowe.Add(rnd.Next(1, 1000));
-                
-                //Console.WriteLine(losowe[i]);
-            }
-            */
             
+            //Pobranie pliku tekstowego text.txt
             string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
-            string[] split = text.Split(new Char[] { });
+            string[] split = text.Split(new Char[] { });    //Podział pliku na listę string
+
             List<string> podzielona = split.ToList();
 
-            Console.WriteLine(split.Count());
-            var lista = ChunkBy(podzielona, podzielona.Count()/4);
-            
-            //for (int i = 0; i < lista[0].Count(); i++)
-            //{
+            Console.WriteLine(split.Count());   //ilość słów ogółem
 
-            //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
-            //}
+            var lista = ChunkBy(podzielona, podzielona.Count()/slaveCount); //Podział listy słów na ilość części slaveCount
             
-            for (int i = 0; i<=3; i++)
+            for (int i = 0; i<slaveCount; i++)
             {
-                //runnables.Add(new Slave(i, lista[i]));
-
-                //Console.WriteLine("liczba el w talicy skroc: {0}", lista[i].Count);
-                //Console.WriteLine(lista[i][2].ToString());
+                //Utworzenie agentów slave otrzymującyh fragmenty listy słów
                 runnables.Add(new Slave(i, lista[i]));
-
             }
             
-            
-            //for (int i = 0; i < split.Count(); i++)
-            //{
-            //    Console.WriteLine(split[i]);
-            //}
-            //var slaves = runnables.Where(r => r.isSlave == true);
-            
-
-            runnables.Add(new Master(1000, runnables));
-
-            
+            //Utworzenie agenta master nadzorującego pracę slave i redukującego ich wyniki do jednego
+            runnables.Add(new Master(1000, runnables));        
             return runnables;
+
         }
         
+        //Metoda dzieląca listę na części o długości chunkSize
         static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize)
         {
             return source

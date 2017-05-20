@@ -21,8 +21,6 @@ namespace One
         bool HasFinished { get; }
 
         Dictionary<string, int> slow { get; }
-
-        //List<int> losy { get; }
         
 
     }

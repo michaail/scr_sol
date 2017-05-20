@@ -83,8 +83,6 @@ namespace One
 
         public Dictionary<string, int> slow { get; set; }
 
-        //public List<int> losy { get; set; } = null;
-
         public int Id { get; private set; }
 
 
