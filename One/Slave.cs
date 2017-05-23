@@ -18,66 +18,66 @@ namespace One
         
         public Slave(int id, List<string> losy) : base(id)
         {
-            Console.WriteLine("I'm in Slave");
-            los = losy;
-            wynik = 0;
-            //iter = 0;
-            SetSlave();
+            //Console.WriteLine("I'm in Slave");
+            //los = losy;
+            //wynik = 0;
+            ////iter = 0;
+            //SetSlave();
         }
         
         public override void Update()
         {
 
-            for (int i = 0; i < los.Count(); i++)
-            {
-
-                if(!slownik.Any(d => d.Key==los[i]))
-                {
-                    slownik.Add(los[i], 2);
-                    //iter++;
-                }
-                else
-                {
-                    int currentCount;
-                    slownik.TryGetValue(los[i], out currentCount);
-                    slownik[los[i]] = currentCount +1;
-                    //slownik.va
-                    //slownik[los[i], ];
-                }
-
-
-                //if (los.Any(slownik[]))
-
-                //if(los[i] == slownik[])
-
-                //Console.WriteLine(los[i]);
-            }
-
-            foreach (KeyValuePair<string, int> kvp in slownik)
-            {
-                //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-            //Console.WriteLine(slownik.Keys[i]);
-
-
-
-
-            //for (int i = 0; i < los.Count()/2; i++)
+            //for (int i = 0; i < los.Count(); i++)
             //{
-            //    //wynik += los[i];
-            //    //Console.WriteLine("etap1");
-            //    //System.Threading.Thread.Sleep(10);
-            //}
-            //Console.WriteLine("1 tappa Slave lives with result of: {0}", wynik);
-            //for (int i = los.Count()/2; i < los.Count(); i++)
+
+            //    if(!slownik.Any(d => d.Key==los[i]))
             //    {
-            //        //wynik += los[i];
-            //        //Console.WriteLine("etap 2");
-            //        //System.Threading.Thread.Sleep(10);
+            //        slownik.Add(los[i], 2);
+            //        //iter++;
+            //    }
+            //    else
+            //    {
+            //        int currentCount;
+            //        slownik.TryGetValue(los[i], out currentCount);
+            //        slownik[los[i]] = currentCount +1;
+            //        //slownik.va
+            //        //slownik[los[i], ];
             //    }
 
-            //Console.WriteLine("2 tappa Slave dies with result of: {0}", wynik);
+
+            //    //if (los.Any(slownik[]))
+
+            //    //if(los[i] == slownik[])
+
+            //    //Console.WriteLine(los[i]);
+            //}
+
+            //foreach (KeyValuePair<string, int> kvp in slownik)
+            //{
+            //    //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            //    Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            //}
+            ////Console.WriteLine(slownik.Keys[i]);
+
+
+
+
+            ////for (int i = 0; i < los.Count()/2; i++)
+            ////{
+            ////    //wynik += los[i];
+            ////    //Console.WriteLine("etap1");
+            ////    //System.Threading.Thread.Sleep(10);
+            ////}
+            ////Console.WriteLine("1 tappa Slave lives with result of: {0}", wynik);
+            ////for (int i = los.Count()/2; i < los.Count(); i++)
+            ////    {
+            ////        //wynik += los[i];
+            ////        //Console.WriteLine("etap 2");
+            ////        //System.Threading.Thread.Sleep(10);
+            ////    }
+
+            ////Console.WriteLine("2 tappa Slave dies with result of: {0}", wynik);
 
             Fin();
         }
