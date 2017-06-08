@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace One
 {
-    class SineGeneratingAgent : Agent
+    class Regulator : Agent
     {
         
         public float Output { get; set; }
 
-        public SineGeneratingAgent(int id) : base(id)
+        public Regulator(int id)
         {
             Console.WriteLine("sga I'm here alive {0} ", id);
+        }
+
+        public override void Initializes()
+        {
+            Init();
         }
 
         public override void Update()

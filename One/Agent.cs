@@ -15,10 +15,9 @@ namespace One
 
         protected readonly float timeStep;
 
-        public Agent (int id, float timeStep = 0.1f)
+        public Agent ()
         {
-            this.timeStep = timeStep;
-            Id = id;
+            
         }
 
         public Agent (int id, List<string> lista)
@@ -27,7 +26,7 @@ namespace One
             
         }
         
-        public Agent (int id, IEnumerable<IRunnable> runnables)
+        public Agent (int id, IRunnable runnable)
         {
             Id = id;
         }
@@ -52,7 +51,15 @@ namespace One
             {
                 Update();
                 vTime += timeStep;
-                System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
+                //System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
+            }
+        }
+
+        public void Initialize()
+        {
+            while(!HasInitialized)
+            {
+                Initializes();
             }
         }
 
@@ -61,22 +68,17 @@ namespace One
             this.HasFinished = true;
         }
 
-        public void SetSlave()
+        public void Init()
         {
-            this.isSlave = true;
+            this.HasInitialized = true;
         }
 
+        public abstract void Initializes();
         public abstract void Update();
 
         public bool HasFinished { get; private set; } = false;
 
-        public bool isSlave { get; private set; } = false;
-
-        public int wynik { get; set; }
-
-        public int initial { get; set; }
-
-        //public List<int> losy { get; set; } = null;
+        public bool HasInitialized { get; private set; } = false;
 
         public int Id { get; private set; }
 

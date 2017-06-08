@@ -15,12 +15,16 @@ namespace One
     static class Program
     {
         static List<int> losowe = new List<int>();
-      
+
+        public static System.Threading.Mutex mut = new System.Threading.Mutex();
+        
         static void Main(string[] args)
         {
             //Console.WriteLine("One");
             //Console.WriteLine("zmiana na gita");
             //GenerateRunnables();
+            Console.WriteLine("start");
+
 
             RunThreads(GenerateRunnables());
             //RunFibres(GenerateRunnables());
@@ -31,33 +35,52 @@ namespace One
 
         static void RunThreads(IEnumerable<IRunnable> runnables)
         {
-            var threads = new List<System.Threading.Thread>(runnables.Count());
-
-            //var slaves = runnables.Where(r => r.isSlave==true);
-            //Console.WriteLine(runnables.Count().ToString());
+            var initThreads = new List<System.Threading.Thread>(runnables.Count());
+            var runThreads = new List<System.Threading.Thread>(runnables.Count());
 
             foreach (var run in runnables)
             {
-                var thread = new System.Threading.Thread(run.Run);
-                threads.Add(thread);
+                var thread = new System.Threading.Thread(run.Initialize);
+                initThreads.Add(thread);
                 thread.Start();
                 
             }
 
-            bool allFin = false;
-            while (!allFin)
+            bool allInit = false;
+            while (!allInit)
             {
                 System.Threading.Thread.Sleep(100);
-                allFin = true;
+                allInit = true;
                 foreach (var runnable in runnables)
                 {
-                    if (!runnable.HasFinished)
+                    if (!runnable.HasInitialized)
                     {
-                        allFin = false;
+                        allInit = false;
                         break;
                     }
                 }
                 //Master mistrz = new Master(100, slaves);
+            }
+            if (allInit)
+            {
+                foreach (var run in runnables)
+                {
+                    var thread = new System.Threading.Thread(run.Run);
+                    runThreads.Add(thread);
+                    thread.Start();
+                }
+                bool allFin = false;
+                while(!allFin)
+                {
+                    foreach (var runnable in runnables)
+                    {
+                        if(!runnable.HasFinished)
+                        {
+                            allFin = false;
+                            break;
+                        }
+                    }
+                }
             }
         }
 
@@ -84,62 +107,15 @@ namespace One
 
         static List<IRunnable> GenerateRunnables()
         {
-            
+            //var u1 = new Uklad(1);
             var runnables = new List<IRunnable>(1000);
-            int id = 0;
-
             
-            for (; id < 10; ++id)
-                runnables.Add(new CountingAgent(id));
+            runnables.Add(new Obiekt(25, new Uklad(1)));
+            //runnables.Add(new Obiekt(50));
+            //runnables.Add(new Obiekt(75));
+            //runnables.Add(new Obiekt(100));
+            //runnables.Add(new Obiekt(125));
 
-            int limit = runnables.Count() + 10;
-            for (; id < limit; ++id)
-                runnables.Add(new SineGeneratingAgent(id));
-
-            limit = runnables.Count() + 100;
-            for (; id < limit; ++id)
-                runnables.Add(new ConstantCountingAgent(id));
-            /*    
-            Random rnd = new Random();
-            for (int i = 0; i < 1000; i++)
-            {
-                losowe.Add(rnd.Next(1, 1000));
-                //Console.WriteLine(losowe[i]);
-            }
-
-            string text = System.IO.File.ReadAllText(@"C:\SCR\IRunnable\Sol\One\text.txt");
-            string[] split = text.Split(new Char[] { ' ', '\n' });
-            List<string> podzielona = split.ToList();
-            
-            var lista = ChunkBy(podzielona, podzielona.Count());
-            */
-            //for (int i = 0; i < lista[0].Count(); i++)
-            //{
-
-            //    //Console.WriteLine("one: {0} ;; two: {1}", lista[0][i], lista[1][i]);
-            //}
-            /*
-            for (int i = 0; i<=0; i++)
-            {
-                runnables.Add(new Slave(i, lista[i]));
-
-                //Console.WriteLine("liczba el w talicy skroc: {0}", lista[i].Count);
-                //Console.WriteLine(lista[i][2].ToString());
-                //runnables.Add(new Slave(i, lista[i]));
-
-            }
-            */
-            
-            //for (int i = 0; i < split.Count(); i++)
-            //{
-            //    Console.WriteLine(split[i]);
-            //}
-            //var slaves = runnables.Where(r => r.isSlave == true);
-            
-
-            //runnables.Add(new Master(1000, runnables));
-
-            
             return runnables;
         }
         

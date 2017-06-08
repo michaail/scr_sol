@@ -59,14 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agent.cs" />
-    <Compile Include="ConstantCountingAgent.cs" />
-    <Compile Include="CountingAgent.cs" />
+    <Compile Include="RegQuality.cs" />
+    <Compile Include="Uklad.cs" />
     <Compile Include="IRunnable.cs" />
     <Compile Include="Master.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SineGeneratingAgent.cs" />
-    <Compile Include="Slave.cs" />
+    <Compile Include="Regulator.cs" />
+    <Compile Include="Obiekt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

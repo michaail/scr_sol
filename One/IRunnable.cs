@@ -10,16 +10,21 @@ namespace One
     {
         void Run();
 
-        bool isSlave { get; }
+        void Initialize();
 
-        int wynik { get; }
+        void Init();
 
-        int initial { get; }
+        //bool isSlave { get; }
+
+        //int wynik { get; }
+
+        //int initial { get; }
 
         IEnumerator<float> CoroutineUpdate();
         
         bool HasFinished { get; }
 
+        bool HasInitialized { get; }
         //List<int> losy { get; }
         
 

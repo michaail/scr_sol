@@ -6,22 +6,28 @@ using System.Threading.Tasks;
 
 namespace One
 {
-    class CountingAgent : Agent
+    class RegQuality : Agent
     {
         private int counter = 0;
 
-        public CountingAgent(int id) : base(id)
+        public RegQuality(int id)
         {
-            Console.WriteLine("ca I'm here alive {0}", id);
+            Console.WriteLine("Reg Quality {0}", id);
+        }
+
+        public override void Initializes()
+        {
+            Init();
         }
 
         public override void Update()
         {
-            if (counter++ <= this.Id)
+            if (counter++ >=10)
             {
-                Console.WriteLine("ca {0}", Id);
+                Console.WriteLine("cca {0} ctr {1}", Id, counter);
                 Fin();
             }
+
         }
     }
 }

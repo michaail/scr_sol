@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace One
 {
@@ -10,29 +11,36 @@ namespace One
     {
         List<IRunnable> agenci = new List<IRunnable>();
 
+        int ctr = 0;
+
+        List<System.Threading.Thread> threads = new List<System.Threading.Thread>();
+
         //int wynik = new int();
 
-        public Master(int id, List<IRunnable> runnables) : base(id)
+        public Master(int id, List<IRunnable> runnables)
         {
-            //agenci = runnables;
-            //Console.WriteLine("I'm in Master");
-            //wynik = 0;
+            agenci = runnables;
+            Console.WriteLine("I'm the Master");
+
         }
+        public override void Initializes()
+        {
+            Init();
+        }
+
 
         public override void Update()
         {
-            //while (!agenci.Any(d => d.HasFinished == true))
-            //{
-            //    System.Threading.Thread.Sleep(10);
-            //}
 
-            //foreach (var a in agenci)
-            //{
-            //    wynik += a.wynik;
-            //}
-            //Console.WriteLine("KONIEC MASTERA!!!!!!!!!!!!!!!!!! wynik: {0}", wynik);
-            ////Console.WriteLine(wynik);
+            Timer oTimer = new Timer();
+            oTimer.Elapsed += new ElapsedEventHandler(OnTimeEvent);
+            oTimer.Interval = 25;
             Fin();
+        }
+
+        private void OnTimeEvent(object oSource, ElapsedEventArgs oElapsedEventsArgs)
+        {
+            
         }
     }
 }
