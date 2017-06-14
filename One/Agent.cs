@@ -20,13 +20,13 @@ namespace One
             
         }
 
-        public Agent (int id, List<string> lista)
+        public Agent (int id, List<double> lista)
         {
             Id = id;
             
         }
         
-        public Agent (int id, IRunnable runnable)
+        public Agent (int id)
         {
             Id = id;
         }
@@ -72,6 +72,11 @@ namespace One
         {
             this.HasInitialized = true;
         }
+
+        static public List<double> uList = new List<double>();
+        static public List<double> eList = new List<double>();
+        static public List<double> yList = new List<double>();
+
 
         public abstract void Initializes();
         public abstract void Update();

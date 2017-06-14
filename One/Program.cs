@@ -18,6 +18,8 @@ namespace One
 
         public static System.Threading.Mutex mut = new System.Threading.Mutex();
         
+        
+
         static void Main(string[] args)
         {
             //Console.WriteLine("One");
@@ -40,6 +42,7 @@ namespace One
 
             foreach (var run in runnables)
             {
+
                 var thread = new System.Threading.Thread(run.Initialize);
                 initThreads.Add(thread);
                 thread.Start();
@@ -110,7 +113,8 @@ namespace One
             //var u1 = new Uklad(1);
             var runnables = new List<IRunnable>(1000);
             
-            runnables.Add(new Obiekt(25, new Uklad(1)));
+            runnables.Add(new Obiekt(25));
+            
             //runnables.Add(new Obiekt(50));
             //runnables.Add(new Obiekt(75));
             //runnables.Add(new Obiekt(100));
