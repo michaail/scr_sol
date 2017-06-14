@@ -47,8 +47,8 @@ namespace One
 
         public void Uchyb()
         {
-
-            A = 1;
+            //Console.WriteLine("{0}", y);
+            //A = 1;
             e = A - y;
             e1 = A - y1;
             e2 = A - y2;

@@ -10,13 +10,14 @@ namespace One
     class Obiekt : Agent
     {
         List<string> los = new List<string>();
-        
+
+        int iter = 0;
 
         public double a0, a1, a2, b1, b2;
         public double Tp { get; set; }
         public double y { get; set; }
 
-
+        //private Timer oTimer;
 
         //public static List<double> eList;
 
@@ -24,6 +25,8 @@ namespace One
         public double K1, K2, K3, kp, Td, Ti;
 
         public Uklad uklad = new Uklad(25, eList);
+
+        
 
         public System.Threading.Mutex mut = new System.Threading.Mutex();
 
@@ -75,29 +78,35 @@ namespace One
 
         public override void Update()
         {
-            
+
 
             Timer oTimer = new Timer();
             oTimer.Elapsed += new ElapsedEventHandler(OnTimeEvent);
             oTimer.Interval = Tp;
             oTimer.Enabled = true;
 
-            
+            //Fin();
             //Console.WriteLine("Wykonanie obiektu");
             
         }
         private void OnTimeEvent(object oSource, ElapsedEventArgs oElapsedEventsArgs)
         {
-            //Console.WriteLine("witeczka z tp {0}", Tp);
+            iter++;
+            
+            
 
+            Fin();
+            var thread = new System.Threading.Thread(uklad.Run);
+            //Console.WriteLine("witeczka z tp {0}", Tp);
+            uklad.A = 1;
 
             mut.WaitOne();
             y1 = yList[yList.Count() - 1];
             y2 = yList[yList.Count() - 2];
 
             u1 = uList[uList.Count() - 1];
-            u2 = uList[uList.Count() - 1];
-
+            u2 = uList[uList.Count() - 2];
+            
             uklad.K1 = K1;
             uklad.K2 = K2;
             uklad.K3 = K3;
@@ -108,9 +117,9 @@ namespace One
             uklad.y2 = y2;
 
             //tutaj start wątku
-            var thread = new System.Threading.Thread(uklad.Run);
-
+            
             thread.Start();
+            uklad.UnFin();
 
             uList.Add(uklad.u);
 
@@ -123,10 +132,12 @@ namespace One
             yList.Add(y);
             uList.Add(uklad.u);
 
-            Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1}", y, uklad.y, Tp);
+            Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1} \t\t{3}", y, uklad.e, Tp, iter);
             mut.ReleaseMutex();
 
-            Fin();
+          
+
+            //Fin();
         }
 
         

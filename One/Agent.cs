@@ -68,6 +68,11 @@ namespace One
             this.HasFinished = true;
         }
 
+        public void UnFin()
+        {
+            this.HasFinished = false;
+        }
+
         public void Init()
         {
             this.HasInitialized = true;
