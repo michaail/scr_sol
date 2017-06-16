@@ -19,6 +19,7 @@ namespace One
       
         static void Main(string[] args)
         {
+
             //Console.WriteLine("One");
             //Console.WriteLine("zmiana na gita");
             //GenerateRunnables();
