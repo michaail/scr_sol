@@ -30,11 +30,14 @@ namespace One
         public override void Update()
         {
 
+            //Console.WriteLine("update z Uklad");
             Uchyb();
 
             Regulator();
 
+            
             Fin();
+            Program.sem.Release(1);
         }
 
         public void Regulator()

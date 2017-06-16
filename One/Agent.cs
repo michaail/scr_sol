@@ -47,11 +47,14 @@ namespace One
 
         public void Run()
         {
-            while(!HasFinished)
+            while (true)
             {
-                Update();
-                vTime += timeStep;
-                //System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
+                while (!HasFinished)
+                {
+                    Update();
+                    vTime += timeStep;
+                    //System.Threading.Thread.Sleep((int)Math.Round(timeStep*1000.0f)); //placeholder
+                }
             }
         }
 

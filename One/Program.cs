@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace One
 {
@@ -17,8 +17,8 @@ namespace One
         static List<int> losowe = new List<int>();
 
         public static System.Threading.Mutex mut = new System.Threading.Mutex();
-        
-        
+
+        public static Semaphore sem = new Semaphore(0, 1);
 
         static void Main(string[] args)
         {
@@ -75,6 +75,7 @@ namespace One
                 bool allFin = false;
                 while(!allFin)
                 {
+                    allFin = true;
                     foreach (var runnable in runnables)
                     {
                         if(!runnable.HasFinished)
@@ -113,7 +114,7 @@ namespace One
             //var u1 = new Uklad(1);
             var runnables = new List<IRunnable>(1000);
             
-            runnables.Add(new Obiekt(25));
+            runnables.Add(new Obiekt(105));
             
             //runnables.Add(new Obiekt(50));
             //runnables.Add(new Obiekt(75));

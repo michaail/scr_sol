@@ -17,6 +17,10 @@ namespace One
         public double Tp { get; set; }
         public double y { get; set; }
 
+        private Timer oTimer;
+        private System.Threading.Thread thread;
+
+
         //private Timer oTimer;
 
         //public static List<double> eList;
@@ -24,7 +28,7 @@ namespace One
         public double u, u1, u2, y1, y2;
         public double K1, K2, K3, kp, Td, Ti;
 
-        public Uklad uklad = new Uklad(25, eList);
+        public Uklad uklad;
 
         
 
@@ -38,7 +42,18 @@ namespace One
 
         public override void Initializes()
         {
-            
+
+            uklad = new Uklad(25, eList);
+            uklad.Fin();
+
+            oTimer = new Timer();
+            oTimer.Elapsed += new ElapsedEventHandler(OnTimeEvent);
+            oTimer.Interval = Tp;
+            Console.WriteLine("nowy timer {0}", Tp);
+
+            thread = new System.Threading.Thread(uklad.Run);
+            thread.Start();
+
             eList.Add(0.0);
             eList.Add(0.0);
             uList.Add(0.0);
@@ -74,33 +89,43 @@ namespace One
 
             //wystawienie flagi o zakończonym procesie
             Init();
+
+
+
         }
 
         public override void Update()
         {
+            //mut.WaitOne();
+            
 
+            
+            //thread.Start();
+            //oTimer.Start();
 
-            Timer oTimer = new Timer();
-            oTimer.Elapsed += new ElapsedEventHandler(OnTimeEvent);
-            oTimer.Interval = Tp;
             oTimer.Enabled = true;
+            Console.WriteLine("zakonczenie timera {0}", iter);
+            Fin();
 
             //Fin();
+            //mut.ReleaseMutex();
             //Console.WriteLine("Wykonanie obiektu");
-            
+
         }
         private void OnTimeEvent(object oSource, ElapsedEventArgs oElapsedEventsArgs)
         {
+            mut.WaitOne();
             iter++;
-            
-            
+            if (iter >= 10000)
+            {
 
-            Fin();
-            var thread = new System.Threading.Thread(uklad.Run);
-            //Console.WriteLine("witeczka z tp {0}", Tp);
+
+                oTimer.Stop();
+                Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1} \t\t{3}", yList[yList.Count() - 1], uklad.e, Tp, iter);
+                Console.ReadKey();
+            }
             uklad.A = 1;
 
-            mut.WaitOne();
             y1 = yList[yList.Count() - 1];
             y2 = yList[yList.Count() - 2];
 
@@ -118,21 +143,29 @@ namespace One
 
             //tutaj start wątku
             
-            thread.Start();
+            //tu się ma uruchamiac uklad Run raz na wywoalanie timera
             uklad.UnFin();
 
+
+            //thread.Start();
+            
+
+
+
+            //ze sie skonczyl uklad run
+            //Console.WriteLine("czekam na semafor");
+            Program.sem.WaitOne();
+            //Console.WriteLine("po semaforze");
+
             uList.Add(uklad.u);
-
-             
-
-            y = a0 * uklad.u + a1 * uklad.u1 + a2 * u1 - b1 * y1 - b2 * y2;
-            y2 = y1;
-            y1 = y;
+            y = a0 * uList[uList.Count()-1] + a1 * uList[uList.Count()-2] + a2 * uList[uList.Count()-3] - b1 * yList[yList.Count()-1] - b2 * yList[yList.Count()-2];
+            //y2 = y1;
+            //y1 = y;
 
             yList.Add(y);
-            uList.Add(uklad.u);
-
-            Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1} \t\t{3}", y, uklad.e, Tp, iter);
+            //uList.Add(uklad.u);
+            //Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1} \t\t{3}", yList[yList.Count() - 1], uklad.e, Tp, iter);
+            //Console.WriteLine("Tp = {2} -- y z obiekt: {0};; y z uklad {1} \t\t{3}", y, uklad.e, Tp, iter);
             mut.ReleaseMutex();
 
           
